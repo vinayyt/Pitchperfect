@@ -1,0 +1,22 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body { background: #000; -webkit-tap-highlight-color: transparent; }
+button, input { font-family: inherit; }
+input { -webkit-appearance: none; }
+
+@keyframes holoShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+@keyframes potGlow {
+  0%,100% { box-shadow: 0 0 12px rgba(244,211,107,0.25); }
+  50%      { box-shadow: 0 0 28px rgba(244,211,107,0.55); }
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}

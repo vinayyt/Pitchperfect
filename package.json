@@ -1,0 +1,15 @@
+{
+  "name": "pitchperfect",
+  "version": "1.0.0",
+  "description": "IPL/WPL cricket card duel game",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "node server/index.js",
+    "install:all": "cd client && npm install && cd ../server && npm install",
+    "dev:server": "cd server && node index.js",
+    "dev:client": "cd client && npm run dev"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: pitchperfect
+    runtime: node
+    buildCommand: npm run build && cd server && npm install
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
