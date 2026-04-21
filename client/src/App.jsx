@@ -49,6 +49,7 @@ export default function App() {
     socket.on('game_started', state => {
       setGameState(state); setLastRound(null); setResult(null);
       setRematchVotes(0); setTimeLeft(state.timeLeft ?? 600);
+      if (state.oppName) setOppName(state.oppName);
       setScreen('game');
     });
 
@@ -115,13 +116,19 @@ export default function App() {
     setLobbyMode('create-form');
   }, []);
 
+  const handlePlayBot = useCallback((name, tl) => {
+    setError(''); setLoading(true); setMyName(name); setTimeLimit(tl);
+    socketRef.current?.emit('play_vs_bot', { name, timeLimit: tl });
+  }, []);
+
   // ── Navigation helpers ──────────────────────────────────────────────────────
   const goCreate = useCallback(() => { setLobbyMode('create-form'); setScreen('lobby'); }, []);
   const goJoin   = useCallback(() => { setLobbyMode('join-form');   setScreen('lobby'); }, []);
+  const goBot    = useCallback(() => { setLobbyMode('bot-form');    setScreen('lobby'); }, []);
 
   // ── Render ──────────────────────────────────────────────────────────────────
   if (screen === 'home') {
-    return <HomeScreen theme={theme} onCreate={goCreate} onJoin={goJoin}/>;
+    return <HomeScreen theme={theme} onCreate={goCreate} onJoin={goJoin} onPlayBot={goBot}/>;
   }
 
   if (screen === 'lobby') {
@@ -138,6 +145,7 @@ export default function App() {
         onCreate={handleCreate}
         onJoin={handleJoin}
         onStart={handleStart}
+        onPlayBot={handlePlayBot}
         onBack={handleHome}
       />
     );
@@ -151,6 +159,7 @@ export default function App() {
         lastRound={lastRound}
         timeLeft={timeLeft}
         myName={myName}
+        oppName={oppName}
         onChooseStat={handleChooseStat}
         onQuit={handleHome}
       />

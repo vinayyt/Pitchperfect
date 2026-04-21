@@ -301,10 +301,73 @@ function JoinWaiting({ theme: t, code, oppName, onBack }) {
   );
 }
 
+// ── BOT FORM ──────────────────────────────────────────────────────────────────
+function BotForm({ theme: t, loading, error, onPlayBot, onBack }) {
+  const [name, setName]         = useState('');
+  const [duration, setDuration] = useState(10);
+  const ref = useRef(null);
+  useEffect(() => { ref.current?.focus(); }, []);
+
+  return (
+    <div style={{ minHeight:'100vh', background:t.bg, fontFamily:t.fontDisplay, color:t.text }}>
+      <Nav theme={t} onBack={onBack}/>
+      <div style={{ maxWidth:560, margin:'80px auto', padding:'0 24px' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:16, marginBottom:8 }}>
+          <span style={{ fontSize:40 }}>🤖</span>
+          <h1 style={{ fontSize:40, fontWeight:800, letterSpacing:-1.5, margin:0 }}>Play vs Bot</h1>
+        </div>
+        <p style={{ fontSize:15, color:t.textMute, marginBottom:40, lineHeight:1.6 }}>
+          Solo mode — the bot picks stats at random. Good luck!
+        </p>
+
+        <Card theme={t}>
+          <Label theme={t}>Your name</Label>
+          <input ref={ref} type="text" value={name} onChange={e => setName(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && name.trim() && onPlayBot(name.trim(), duration * 60)}
+            placeholder="Enter your name" maxLength={18}
+            style={{ width:'100%', padding:'14px 18px', marginBottom:32,
+              background:t.bgElev, border:`1.5px solid ${t.border}`, borderRadius:12,
+              color:t.text, fontSize:16, fontFamily:t.fontDisplay, outline:'none',
+              transition:'border-color 0.2s' }}
+            onFocus={e => e.target.style.borderColor=t.accent}
+            onBlur={e => e.target.style.borderColor=t.border}
+          />
+
+          <Label theme={t}>Match length</Label>
+          <div style={{ display:'flex', gap:12, marginBottom:32 }}>
+            {[5, 10, 15].map(d => (
+              <button key={d} onClick={() => setDuration(d)} style={{
+                all:'unset', flex:1, textAlign:'center', padding:'16px 0', cursor:'pointer',
+                background: duration===d ? `${t.accent}22` : t.bgElev,
+                border:`2px solid ${duration===d ? t.accent : t.borderSoft}`,
+                borderRadius:12, transition:'all 0.15s',
+              }}>
+                <div style={{ fontSize:26, fontWeight:800, color:duration===d?t.accent:t.text, fontFamily:t.fontMono }}>{d}</div>
+                <div style={{ fontSize:11, letterSpacing:1, color:t.textMute, marginTop:4 }}>MIN</div>
+              </button>
+            ))}
+          </div>
+
+          {error && (
+            <div style={{ padding:'12px 16px', background:`${t.danger}18`, border:`1px solid ${t.danger}44`,
+              borderRadius:10, fontSize:13, color:t.danger, marginBottom:20 }}>{error}</div>
+          )}
+
+          <Btn theme={t} size="lg" onClick={() => name.trim() && onPlayBot(name.trim(), duration * 60)}
+            disabled={!name.trim() || loading} style={{ width:'100%' }}>
+            {loading ? 'Starting…' : '🤖 Start bot game →'}
+          </Btn>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
 // ── ROUTER ────────────────────────────────────────────────────────────────────
-export default function LobbyScreen({ theme: t, mode, code, myName, oppName, timeLimit, loading, error, onCreate, onJoin, onStart, onBack }) {
+export default function LobbyScreen({ theme: t, mode, code, myName, oppName, timeLimit, loading, error, onCreate, onJoin, onStart, onPlayBot, onBack }) {
   if (mode === 'host-waiting') return <HostWaiting theme={t} code={code} oppName={oppName} timeLimit={timeLimit} onStart={onStart} onBack={onBack}/>;
   if (mode === 'join-form')    return <JoinForm    theme={t} loading={loading} error={error} onJoin={onJoin} onBack={onBack}/>;
   if (mode === 'join-waiting') return <JoinWaiting theme={t} code={code} oppName={oppName} onBack={onBack}/>;
+  if (mode === 'bot-form')     return <BotForm     theme={t} loading={loading} error={error} onPlayBot={onPlayBot} onBack={onBack}/>;
   return <CreateForm theme={t} loading={loading} error={error} onCreate={onCreate} onBack={onBack}/>;
 }
