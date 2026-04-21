@@ -3,7 +3,7 @@ import PlayerCard from '../components/PlayerCard';
 import { ThemeToggle } from '../ThemeContext';
 import { SAMPLE_PLAYERS } from '../data';
 
-export default function HomeScreen({ theme: t, onCreate, onJoin }) {
+export default function HomeScreen({ theme: t, onCreate, onJoin, onPlayBot }) {
   return (
     <div style={{ minHeight:'100vh', background:t.bg, fontFamily:t.fontDisplay, color:t.text, display:'flex', flexDirection:'column' }}>
 
@@ -47,11 +47,21 @@ export default function HomeScreen({ theme: t, onCreate, onJoin }) {
             <Btn theme={t} size="lg" variant="ghost" onClick={onJoin} style={{ width:'100%', fontSize:17 }}>
               Join with a code
             </Btn>
+            <button onClick={onPlayBot} style={{
+              all:'unset', cursor:'pointer', textAlign:'center', padding:'14px 0',
+              border:`1.5px dashed ${t.accent}66`, borderRadius:14, fontSize:15,
+              color:t.textMute, fontFamily:t.fontDisplay, fontWeight:600,
+              transition:'all 0.2s', letterSpacing:0.3,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor=t.accent; e.currentTarget.style.color=t.accent; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor=`${t.accent}66`; e.currentTarget.style.color=t.textMute; }}>
+              🤖 Play vs Bot
+            </button>
           </div>
 
           <div style={{ marginTop:40, display:'flex', gap:32, fontSize:12, color:t.textDim, fontFamily:t.fontMono, letterSpacing:0.8 }}>
             <span>⏱ 5–15 min rounds</span>
-            <span>🃏 22 cards</span>
+            <span>🃏 80 cards</span>
             <span>🏆 4 rarity tiers</span>
           </div>
         </div>

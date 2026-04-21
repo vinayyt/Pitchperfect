@@ -53,20 +53,20 @@ const STATS = [
 const STAT_BY_KEY = Object.fromEntries(STATS.map(s => [s.key, s]));
 
 // ── 80 players: 50 men (IPL) + 30 women (WPL / career T20) ──────────────────
-// Stats: IPL career through ~2024 season for men; career T20 franchise + international for women
+// Stats: IPL career through IPL 2026 for men; WPL 2025 + career T20 for women
 const RAW_PLAYERS = [
 
   // ════════════════════════════════ MEN · LEGEND (6) ════════════════════════════
   { id:'m01', name:'Virat Kohli',       team:'RCB',  role:'BAT', league:'M', rarity:'LEGEND',
-    matches:252, runs:8004, avg:37.25, sr:130.1, fifties:62, hundreds:8,  hs:113,
+    matches:267, runs:8661, avg:39.55, sr:132.9, fifties:63, hundreds:8,  hs:113,
     wkts:4,   econ:8.28, bowlAvg:89.50, bestFig:[1,13], fiveFor:0 },
 
   { id:'m02', name:'MS Dhoni',          team:'CSK',  role:'WK',  league:'M', rarity:'LEGEND',
-    matches:264, runs:5243, avg:39.12, sr:135.9, fifties:23, hundreds:0,  hs:84,
+    matches:278, runs:5439, avg:38.30, sr:135.9, fifties:24, hundreds:0,  hs:84,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m03', name:'Rohit Sharma',      team:'MI',   role:'BAT', league:'M', rarity:'LEGEND',
-    matches:257, runs:6211, avg:29.96, sr:130.4, fifties:43, hundreds:2,  hs:109,
+    matches:276, runs:7183, avg:29.93, sr:140.0, fifties:48, hundreds:2,  hs:109,
     wkts:15,  econ:8.31, bowlAvg:35.20, bestFig:[2,22], fiveFor:0 },
 
   { id:'m04', name:'AB de Villiers',    team:'RCB',  role:'WK',  league:'M', rarity:'LEGEND',
@@ -74,7 +74,7 @@ const RAW_PLAYERS = [
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m05', name:'David Warner',      team:'SRH',  role:'BAT', league:'M', rarity:'LEGEND',
-    matches:184, runs:6397, avg:41.27, sr:140.0, fifties:61, hundreds:4,  hs:126,
+    matches:184, runs:6565, avg:40.52, sr:139.8, fifties:62, hundreds:4,  hs:126,
     wkts:1,   econ:8.00, bowlAvg:56.00, bestFig:[1,20], fiveFor:0 },
 
   { id:'m06', name:'Lasith Malinga',    team:'MI',   role:'BWL', league:'M', rarity:'LEGEND',
@@ -87,60 +87,60 @@ const RAW_PLAYERS = [
     wkts:36,  econ:8.06, bowlAvg:31.00, bestFig:[2,13], fiveFor:0 },
 
   { id:'m08', name:'Andre Russell',     team:'KKR',  role:'ALL', league:'M', rarity:'GOLD',
-    matches:111, runs:2038, avg:29.68, sr:177.9, fifties:9,  hundreds:0,  hs:88,
-    wkts:90,  econ:9.10, bowlAvg:26.30, bestFig:[4,20], fiveFor:0 },
+    matches:134, runs:2604, avg:28.30, sr:174.1, fifties:12, hundreds:0,  hs:88,
+    wkts:121, econ:9.50, bowlAvg:27.00, bestFig:[4,20], fiveFor:0 },
 
   { id:'m09', name:'Jasprit Bumrah',    team:'MI',   role:'BWL', league:'M', rarity:'GOLD',
-    matches:130, runs:52,   avg:5.78,  sr:75.0,  fifties:0,  hundreds:0,  hs:10,
-    wkts:145, econ:7.39, bowlAvg:22.90, bestFig:[5,10], fiveFor:2 },
+    matches:145, runs:52,   avg:5.78,  sr:75.0,  fifties:0,  hundreds:0,  hs:10,
+    wkts:183, econ:7.25, bowlAvg:22.02, bestFig:[5,10], fiveFor:2 },
 
   { id:'m10', name:'Rashid Khan',       team:'GT',   role:'BWL', league:'M', rarity:'GOLD',
-    matches:120, runs:410,  avg:16.40, sr:145.0, fifties:0,  hundreds:0,  hs:40,
-    wkts:145, econ:6.41, bowlAvg:20.70, bestFig:[5,27], fiveFor:2 },
+    matches:141, runs:424,  avg:16.40, sr:145.0, fifties:0,  hundreds:0,  hs:40,
+    wkts:164, econ:7.11, bowlAvg:23.90, bestFig:[4,24], fiveFor:0 },
 
   { id:'m11', name:'Ravindra Jadeja',   team:'CSK',  role:'ALL', league:'M', rarity:'GOLD',
-    matches:230, runs:2756, avg:26.48, sr:127.6, fifties:8,  hundreds:0,  hs:62,
-    wkts:150, econ:7.62, bowlAvg:29.70, bestFig:[5,16], fiveFor:1 },
+    matches:256, runs:3000, avg:26.20, sr:127.6, fifties:9,  hundreds:0,  hs:62,
+    wkts:172, econ:7.80, bowlAvg:29.70, bestFig:[5,16], fiveFor:1 },
 
   { id:'m12', name:'Yuzvendra Chahal',  team:'RR',   role:'BWL', league:'M', rarity:'GOLD',
-    matches:160, runs:78,   avg:5.20,  sr:86.7,  fifties:0,  hundreds:0,  hs:18,
-    wkts:205, econ:7.59, bowlAvg:21.70, bestFig:[5,40], fiveFor:1 },
+    matches:179, runs:78,   avg:5.20,  sr:86.7,  fifties:0,  hundreds:0,  hs:18,
+    wkts:224, econ:8.00, bowlAvg:23.03, bestFig:[5,40], fiveFor:1 },
 
   { id:'m13', name:'KL Rahul',          team:'LSG',  role:'WK',  league:'M', rarity:'GOLD',
-    matches:144, runs:5106, avg:46.41, sr:136.0, fifties:42, hundreds:6,  hs:132,
+    matches:155, runs:5410, avg:45.08, sr:136.1, fifties:42, hundreds:5,  hs:132,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m14', name:'Jos Buttler',       team:'RR',   role:'WK',  league:'M', rarity:'GOLD',
-    matches:91,  runs:3582, avg:41.17, sr:149.8, fifties:25, hundreds:7,  hs:124,
+    matches:126, runs:4321, avg:40.01, sr:163.0, fifties:26, hundreds:7,  hs:124,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m15', name:'Suryakumar Yadav',  team:'MI',   role:'BAT', league:'M', rarity:'GOLD',
-    matches:155, runs:3747, avg:31.48, sr:148.7, fifties:25, hundreds:1,  hs:117,
+    matches:150, runs:3594, avg:32.10, sr:145.3, fifties:24, hundreds:2,  hs:117,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m16', name:'Shubman Gill',      team:'GT',   role:'BAT', league:'M', rarity:'GOLD',
-    matches:105, runs:3388, avg:37.22, sr:134.2, fifties:23, hundreds:3,  hs:129,
+    matches:118, runs:3866, avg:37.22, sr:138.7, fifties:26, hundreds:4,  hs:130,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m17', name:'Bhuvneshwar Kumar', team:'SRH',  role:'BWL', league:'M', rarity:'GOLD',
-    matches:164, runs:120,  avg:7.06,  sr:78.4,  fifties:0,  hundreds:0,  hs:19,
-    wkts:180, econ:7.27, bowlAvg:24.70, bestFig:[5,19], fiveFor:1 },
+    matches:195, runs:120,  avg:7.06,  sr:78.4,  fifties:0,  hundreds:0,  hs:19,
+    wkts:205, econ:7.72, bowlAvg:27.25, bestFig:[5,19], fiveFor:1 },
 
   { id:'m18', name:'Hardik Pandya',     team:'MI',   role:'ALL', league:'M', rarity:'GOLD',
-    matches:120, runs:2672, avg:30.14, sr:147.2, fifties:14, hundreds:0,  hs:91,
-    wkts:68,  econ:8.86, bowlAvg:34.20, bestFig:[3,17], fiveFor:0 },
+    matches:155, runs:2816, avg:28.44, sr:163.5, fifties:10, hundreds:0,  hs:91,
+    wkts:80,  econ:9.23, bowlAvg:35.10, bestFig:[3,17], fiveFor:0 },
 
   // ════════════════════════════════ MEN · SILVER (18) ═══════════════════════════
   { id:'m19', name:'Faf du Plessis',    team:'RCB',  role:'BAT', league:'M', rarity:'SILVER',
-    matches:130, runs:4233, avg:36.50, sr:136.2, fifties:33, hundreds:2,  hs:96,
+    matches:130, runs:4773, avg:39.00, sr:136.2, fifties:39, hundreds:2,  hs:96,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m20', name:'Rishabh Pant',      team:'DC',   role:'WK',  league:'M', rarity:'SILVER',
-    matches:111, runs:3284, avg:35.13, sr:148.4, fifties:18, hundreds:1,  hs:128,
+    matches:131, runs:3700, avg:33.94, sr:140.0, fifties:20, hundreds:2,  hs:128,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m21', name:'Ruturaj Gaikwad',   team:'CSK',  role:'BAT', league:'M', rarity:'SILVER',
-    matches:83,  runs:2836, avg:39.66, sr:133.3, fifties:22, hundreds:1,  hs:101,
+    matches:91,  runs:2970, avg:38.00, sr:140.8, fifties:22, hundreds:2,  hs:108,
     wkts:0,   econ:0,    bowlAvg:0,     bestFig:[0,0],  fiveFor:0 },
 
   { id:'m22', name:'Ishan Kishan',      team:'MI',   role:'WK',  league:'M', rarity:'SILVER',
