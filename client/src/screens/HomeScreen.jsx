@@ -104,8 +104,13 @@ export default function HomeScreen({ theme: t, onCreate, onJoin, onPlayBot }) {
       </div>
 
       {/* Footer */}
-      <div style={{ padding:'20px 48px', textAlign:'center', fontSize:11, color:t.textDim, fontFamily:t.fontMono, letterSpacing:0.5, borderTop:`1px solid ${t.borderSoft}` }}>
-        PITCH PERFECT · FICTIONAL PLAYERS · CARD BATTLE GAME
+      <div style={{ padding:'20px 48px', textAlign:'center', borderTop:`1px solid ${t.borderSoft}` }}>
+        <div style={{ fontSize:11, color:t.textDim, fontFamily:t.fontMono, letterSpacing:0.5, marginBottom:6 }}>
+          PITCH PERFECT · CARD BATTLE GAME
+        </div>
+        <div style={{ fontSize:10, color:t.textDim, fontFamily:t.fontMono, letterSpacing:0.3, lineHeight:1.6, maxWidth:600, margin:'0 auto' }}>
+          Independent fan project. Not affiliated with or endorsed by BCCI, IPL, WPL, or any cricket board or player. Player names and statistics are used for entertainment purposes only.
+        </div>
       </div>
     </div>
   );
