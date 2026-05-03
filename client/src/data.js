@@ -1,5 +1,24 @@
 // Client-side stat/role metadata (players come from server)
 
+// All 15 IPL/WPL teams available for auction
+export const AUCTION_TEAMS = {
+  CSK:  { name: 'Chennai Super Kings',         short: 'CSK',   primary: '#f5c542', secondary: '#1e2c56', league: 'M' },
+  MI:   { name: 'Mumbai Indians',              short: 'MI',    primary: '#005DA0', secondary: '#d4a017', league: 'M' },
+  RCB:  { name: 'Royal Challengers Bengaluru', short: 'RCB',   primary: '#EC1C24', secondary: '#1a1a1a', league: 'M' },
+  KKR:  { name: 'Kolkata Knight Riders',       short: 'KKR',   primary: '#3A225D', secondary: '#B3A123', league: 'M' },
+  SRH:  { name: 'Sunrisers Hyderabad',         short: 'SRH',   primary: '#F7A721', secondary: '#1a1a1a', league: 'M' },
+  DC:   { name: 'Delhi Capitals',              short: 'DC',    primary: '#17479E', secondary: '#EF1E25', league: 'M' },
+  PBKS: { name: 'Punjab Kings',                short: 'PBKS',  primary: '#ED1F27', secondary: '#1a1a1a', league: 'M' },
+  RR:   { name: 'Rajasthan Royals',            short: 'RR',    primary: '#E91F7E', secondary: '#254AA5', league: 'M' },
+  GT:   { name: 'Gujarat Titans',              short: 'GT',    primary: '#C8A951', secondary: '#1B2133', league: 'M' },
+  LSG:  { name: 'Lucknow Super Giants',        short: 'LSG',   primary: '#54B3D6', secondary: '#A72B1E', league: 'M' },
+  MIW:  { name: 'MI Women',                    short: 'MI-W',  primary: '#005DA0', secondary: '#d4a017', league: 'W' },
+  DCW:  { name: 'Delhi Capitals Women',        short: 'DC-W',  primary: '#17479E', secondary: '#EF1E25', league: 'W' },
+  RCBW: { name: 'RCB Women',                   short: 'RCB-W', primary: '#EC1C24', secondary: '#1a1a1a', league: 'W' },
+  UPW:  { name: 'UP Warriorz',                 short: 'UP-W',  primary: '#8B0000', secondary: '#FFD700', league: 'W' },
+  GTW:  { name: 'Gujarat Giants',              short: 'GG-W',  primary: '#C8A951', secondary: '#1B2133', league: 'W' },
+};
+
 export const STATS = [
   { key: 'matches',  label: 'Matches',        hi: true,  fmt: v => String(v ?? 0) },
   { key: 'runs',     label: 'Runs',           hi: true,  fmt: v => (v ?? 0).toLocaleString() },
